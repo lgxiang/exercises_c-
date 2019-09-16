@@ -2,10 +2,40 @@
 //
 
 #include <iostream>
+#define _USE_MATH_DEFINES
+#include <math.h>
+#include <iomanip>
+using namespace std;
+void function(double L, double W, double x, double y, double R, double a, double v, double s) {
+	//分解台球运动，垂直于水平两个方向
+	x = x + v * s * cos(a * M_PI/180.00);
+	y = y + v * s * sin(a * M_PI/180.00);
+	while (x > L - R || x < R) {
+		if (x > L - R)
+			x = 2 * (L - R) - x;
+		if (x < R)
+			x = 2 * R - x;
+	}
+	while (y > W - R || y < R) {
+		if (y > W - R)
+			y = 2 * (W - R) - y;
+		if (y < R)
+			y = 2 * R - y;
+	}
+	//cout << x << " " << y << endl;
+	cout << setiosflags(ios::fixed) << setprecision(2) << x << " " << y << endl;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	double L, W, x, y, R, a, v, s;
+	cin >> L >> W >> x >> y >> R >> a >> v >> s;
+	while (!(L == 0 && W == 0 && x == 0 && y == 0 && R == 0 && a == 0 && v == 0 && s == 0)) {
+		function(L, W, x, y, R, a, v, s);
+		cin >> L >> W >> x >> y >> R >> a >> v >> s;
+	}
+	
+	
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
